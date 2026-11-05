@@ -1,0 +1,45 @@
+{
+ "request_shape": {
+  "input_items": 7,
+  "bytes": 47594,
+  "tools": [
+   "exec_command",
+   "write_stdin",
+   "request_user_input",
+   "view_image",
+   "multi_agent_v1",
+   "get_goal",
+   "create_goal",
+   "update_goal",
+   "web_search"
+  ]
+ },
+ "response": {
+  "id": "resp_fda76961429e4291",
+  "object": "response",
+  "created_at": 1790116771,
+  "status": "completed",
+  "model": "claude-opus-5",
+  "output": [
+   {
+    "type": "function_call",
+    "id": "fc_82ec6c7c06b4415e",
+    "call_id": "call_4142cb5f61cf47cc",
+    "status": "completed",
+    "name": "exec_command",
+    "arguments": "{\"cmd\": \"cat > /tmp/p.py <<'EOF'\\nimport re\\np='src/bin/bat/assets.rs'\\ns=open(p).read()\\ns=s.replace(\\\"\\\"\\\"use std::borrow::Cow;\\nuse std::fs;\\nuse std::io;\\n\\\"\\\"\\\",\\\"\\\"\\\"use std::borrow::Cow;\\nuse std::fs;\\nuse std::io;\\nuse std::path::Path;\\n\\\"\\\"\\\")\\ns=s.replace(\\\"\\\"\\\"pub fn clear_assets() {\\n    clear_asset(\\\"themes.bin\\\", \\\"theme set cache\\\");\\n    clear_asset(\\\"syntaxes.bin\\\", \\\"syntax set cache\\\");\\n    clear_asset(\\\"metadata.yaml\\\", \\\"metadata file\\\");\\n}\\\"\\\"\\\",\\\"\\\"\\\"pub fn clear_assets(cache_dir: &Path) {\\n    clear_asset(cache_dir.join(\\\"themes.bin\\\"), \\\"theme set cache\\\");\\n    clear_asset(cache_dir.join(\\\"syntaxes.bin\\\"), \\\"syntax set cache\\\");\\n    clear_asset(cache_dir.join(\\\"metadata.yaml\\\"), \\\"metadata file\\\");\\n}\\\"\\\"\\\")\\ns=s.replace(\\\"\\\"\\\"fn clear_asset(filename: &str, description: &str) {\\n    print!(\\\"Clearing {} ... \\\", description);\\n    let path = PROJECT_DIRS.cache_dir().join(filename);\\n    match fs::remove_file(&path) {\\\"\\\"\\\",\\\"\\\"\\\"fn clear_asset(path: PathBuf, description: &str) {\\n    print!(\\\"Clearing {} ... \\\", description);\\n    match fs::remove_file(&path) {\\\"\\\"\\\")\\ns=s.replace(\\\"use std::path::Path;\\\",\\\"use std::path::{Path, PathBuf};\\\")\\nopen(p,'w').write(s)\\n\\np='src/bin/bat/main.rs'\\ns=open(p).read()\\ns=s.replace(\\\"\\\"\\\"    } else if matches.get_flag(\\\"clear\\\") {\\n        clear_assets();\\n    }\\\"\\\"\\\",\\\"\\\"\\\"    } else if matches.get_flag(\\\"clear\\\") {\\n        let target_dir = matches\\n            .get_one::<String>(\\\"target\\\")\\n            .map(Path::new)\\n            .unwrap_or_else(|| PROJECT_DIRS.cache_dir());\\n\\n        clear_assets(target_dir);\\n    }\\\"\\\"\\\")\\nopen(p,'w').write(s)\\nEOF\\npython3 /tmp/p.py && grep -n 'clear_assets\\\\|use std::path' src/bin/bat/main.rs src/bin/bat/assets.rs\", \"workdir\": \"/testbed\"}"
+   }
+  ],
+  "usage": {
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  }
+ }
+}

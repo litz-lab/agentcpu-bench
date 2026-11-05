@@ -1,0 +1,17 @@
+# Codex CLI configuration used for every code-rust recording and replay.
+# setup.sh copies it to home/.codex/config.toml; the drivers mount that
+# directory read-only and copy config.toml into the container's CODEX_HOME.
+# The base_url is overridden per run on the command line (-c model_providers...).
+model = "claude-opus-5"
+model_provider = "agentcpu"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
+
+[model_providers.agentcpu]
+name = "agentcpu recorder"
+base_url = "http://127.0.0.1:18701/v1"
+wire_api = "responses"
+env_key = "AGENTCPU_KEY"
+
+[projects."/testbed"]
+trust_level = "trusted"

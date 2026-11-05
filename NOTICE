@@ -1,0 +1,20 @@
+AgentCPU
+Copyright 2026 Surim Oh and Heiner Litz, University of California, Santa Cruz
+
+Licensed under the Apache License, Version 2.0 (the "License"); see LICENSE.
+
+The recorded model responses under bundles/ and agentcpu/anchors/claude_code/tasks/
+are outputs of Claude Opus 5 (Anthropic) and are redistributed for benchmark replay
+only; their use is additionally subject to Anthropic's terms. The recorded sessions
+quote task text from AppWorld, DABStep, SWE-bench Verified and SWE-bench
+Multilingual, and source code from the task repositories (psf/requests,
+sharkdp/bat), under their own licenses.
+
+bundles/code-rust/swebench_multilingual/ contains one row (sharkdp__bat-2393) of the
+SWE-bench Multilingual task table (SWE-bench/SWE-bench_Multilingual on Hugging Face),
+MIT License, with the dataset card as README.md.
+
+The products the benchmark drives (Claude Code, Codex CLI, SWE-agent, Open
+Interpreter, LangChain, AppWorld), the SWE-bench evaluation images and the DABStep
+dataset are third-party works under their own licenses and are not included in this
+repository.

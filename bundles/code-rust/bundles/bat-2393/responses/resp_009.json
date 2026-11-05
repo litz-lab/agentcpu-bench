@@ -1,0 +1,45 @@
+{
+ "request_shape": {
+  "input_items": 21,
+  "bytes": 59160,
+  "tools": [
+   "exec_command",
+   "write_stdin",
+   "request_user_input",
+   "view_image",
+   "multi_agent_v1",
+   "get_goal",
+   "create_goal",
+   "update_goal",
+   "web_search"
+  ]
+ },
+ "response": {
+  "id": "resp_dda4a1bf077a4b4a",
+  "object": "response",
+  "created_at": 1790116803,
+  "status": "completed",
+  "model": "claude-opus-5",
+  "output": [
+   {
+    "type": "function_call",
+    "id": "fc_792d3afbdf184ee6",
+    "call_id": "call_5867020d9b2b4afa",
+    "status": "completed",
+    "name": "exec_command",
+    "arguments": "{\"cmd\": \"export PATH=\\\"/usr/local/cargo/bin:$HOME/.cargo/bin:$PATH\\\"; which cargo && cargo build 2>&1 | tail -30\", \"workdir\": \"/testbed\", \"yield_time_ms\": 30000}"
+   }
+  ],
+  "usage": {
+   "input_tokens": 0,
+   "output_tokens": 0,
+   "total_tokens": 0,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  }
+ }
+}

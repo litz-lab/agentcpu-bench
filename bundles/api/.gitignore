@@ -1,0 +1,6 @@
+venv/
+appworld_venv/
+appworld/
+hf/
+libagent_markers.so
+.req.txt

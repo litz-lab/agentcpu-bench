@@ -1,0 +1,67 @@
+{
+ "bundle": "code-node/requests_5414",
+ "harness": "Claude Code (claude CLI)",
+ "harness_version": "2.1.274",
+ "model": "claude-opus-5",
+ "recording_date": "2026-09-17",
+ "recorded_on": "a Broadwell host, ANTHROPIC_BASE_URL -> ccproxy record, --strict-mcp-config (no account MCP servers)",
+ "task": {
+  "source": "SWE-bench Verified",
+  "instance_id": "psf__requests-5414",
+  "difficulty": "<15 min fix",
+  "base_commit": "39d0fdd9096f7dceccbc8f82e1eda7dd64717a8e",
+  "prompt": "prompt.txt"
+ },
+ "tools_allowed": [
+  "Bash",
+  "Read",
+  "Edit",
+  "Write",
+  "Grep",
+  "Glob"
+ ],
+ "max_turns": 40,
+ "session_shape": {
+  "rounds": 10,
+  "turns_reported_by_cli": 11,
+  "exchanges_recorded": 11,
+  "count_tokens_calls": 1,
+  "prompt_tokens_round1": 27558,
+  "prompt_tokens_last": 32501,
+  "prompt_tokens_median": 29752,
+  "output_tokens_total": 3464,
+  "request_bytes_range": [
+   76933,
+   92502
+  ],
+  "tools_in_request": 24
+ },
+ "replay": {
+  "replays": 2,
+  "misses": 0,
+  "turns": 11,
+  "diff_identical_to_recording": true,
+  "instructions_whole_tree": [
+   18085313967,
+   18120143855
+  ],
+  "instructions_spread_pct": 0.19
+ },
+ "completion": {
+  "check": "sweagent_bundle/check_swebench.sh",
+  "recorded_fix_passes": true,
+  "detail": "FAIL_TO_PASS 1 failed without, 1 passed with the fix"
+ },
+ "superseded_recording": "an earlier recording without --strict-mcp-config carried 72 tool schemas (48 from the account's MCP servers) and 176 KB requests; discarded",
+ "reference": {
+  "tool_hash": "52e6e3a5dbce7761",
+  "tool_results": 10,
+  "patch_hash": "adfa5771ae09b6ff",
+  "source": "two replays from a clean checkout at a new path on a Sapphire Rapids host (2026-10-01): 0 misses, identical tool hashes, patches identical to the recording",
+  "tool_hash_rules": "tool_hash.py: pytest outcome lines only, durations, git object ids and the task directory normalised, lines sorted within a result, parallel results sorted within a turn",
+  "tool_hash_by_build": {
+   "2.1.274 (Bun)": "52e6e3a5dbce7761",
+   "2.1.112 (Node 22)": "e6c4e87424a9be5b"
+  }
+ }
+}

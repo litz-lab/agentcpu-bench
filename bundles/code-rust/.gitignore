@@ -1,0 +1,4 @@
+.local/
+vendor
+home/
+node_modules/

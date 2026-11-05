@@ -1,0 +1,33 @@
+{
+ "workload": "code-rust",
+ "harness": "Codex CLI 0.156.0 (OpenAI, Rust, static musl binary from npm @openai/codex-linux-x64), wire_api responses through codex_responses_proxy.py",
+ "tool_backend": "the task's SWE-bench Multilingual evaluation image (Ubuntu 22.04, Rust 1.81.0, cargo; checkout at /testbed), Codex sandbox off (the container is the sandbox), commands via Codex's exec_command tool",
+ "task_source": "SWE-bench Multilingual sharkdp__bat-2393 (Rust): `bat cache --clear` should honour --target; FAIL_TO_PASS cache_clear",
+ "model": "claude-opus-5 via agentcpu recorder (RECORD_BACKEND=claude-cli, SAMPLES=1), prompted-JSON tool calling; Responses API items rebuilt by the adapter",
+ "recorded": "2026-09-22",
+ "llm_calls": 14,
+ "commands": 12,
+ "wall_s_recording": 113.8,
+ "verdict": {
+  "FAIL_TO_PASS": {
+   "cache_clear": "pass"
+  },
+  "verdict": true
+ },
+ "verdict_check": "check_codex.sh: apply patch + test_patch in a fresh task container, run the instance eval script, parse cargo test lines; fails on an empty patch, passes on the gold patch (measured)",
+ "content_hash_recording": "02d428d560bb79b7",
+ "patch_hash_recording": "2c044fbd91137d6e",
+ "replay": "run_codex_task.sh MODE=replay (task image under docker) or replay_codex_trace.sh (agentcpu_rust image): adapter serves resp_NNN.json in order; content hash is order-insensitive per command output (rg and cargo emit lines in parallel order) with timings scrubbed",
+ "deployment_evidence": "Codex CLI is OpenAI's shipped coding agent; 2,739 of the 8,058 TraceLab production sessions are Codex sessions (grade A for session shape)",
+ "evidence_grade": "A for shape (TraceLab codex rows), harness is the shipped product; task source grade B (benchmark)",
+ "known_fidelity_notes": [
+  "the model is Opus 5, not the OpenAI model Codex ships with; tool schemas (exec_command, write_stdin, request_user_input, view_image, multi_agent_v1, goals, web_search) are Codex's own and were offered unchanged",
+  "Codex prints a metadata warning for the unknown model name and uses fallback context-window metadata"
+ ],
+ "content_hash_rules": "codex_hash.py (2026-10-01): adds cargo progress lines, per-test lines, ls dates and Codex-yielded commands to the normalisations; earlier value b192fc9b5fe1a17f; 2026-10-28: also cargo's minute durations (\"19m 16s\", \"1h 2m\"), printed when a build runs over a minute (under DynamoRIO); the recording's hash is unchanged by this rule (02d428d560bb79b7, recording and replays recomputed)",
+ "replays": {
+  "broadwell_host_2026-09-22": "2x match (earlier normalisation rules)",
+  "sapphire_rapids_clean_checkout_2026-10-01": "02d428d560bb79b7 match, patch match, 0 misses",
+  "agentcpu_rust_image_tools_replay_2026-10-28": "02d428d560bb79b7 match, patch match, 0 misses (tools_replay.sh: trace uid with /bin/bash login shell, login PATH without /usr/local/cargo/bin as in the task image)"
+ }
+}

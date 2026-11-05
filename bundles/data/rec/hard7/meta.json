@@ -1,0 +1,34 @@
+{
+ "workload": "data",
+ "harness": "Open Interpreter 0.4.3 (pip), Python 3.11.16 (uv), litellm 1.83.0, openai 3.16.2, jupyter_client 8.10.0, ipykernel 6.31.0, pandas 3.0.6",
+ "tool_backend": "the product's own Jupyter kernel (python3), persistent for the session",
+ "task_source": "DABStep (adyen/DABstep on Hugging Face, dev split with answers), hard tasks 1273,1305,1464,1681,1753,1871,2697",
+ "model": "claude-opus-5 via agentcpu recorder (RECORD_BACKEND=claude-cli, SAMPLES=1), prompted-JSON tool calling through shim_claude",
+ "recorded": "2026-09-21",
+ "llm_calls": 16,
+ "code_cells": 9,
+ "verdicts": [
+  true,
+  false,
+  true,
+  true,
+  true,
+  true,
+  false
+ ],
+ "verdict_check": "DABStep answer match: exact after trimming, set equality for comma lists, 1e-6 for numbers (run_oi.py same())",
+ "prompt_variant": "files",
+ "content_hash_recording": "8de6c97110ae5f75",
+ "replay": "replay_server.py over recorder iterations -> oi_llm_proxy.py (SSE) -> Open Interpreter; a valid replay reproduces content_hash_recording",
+ "deployment_evidence": "Open Interpreter is a deployed open-source code/data agent (GitHub, 50K+ stars, pip package); DABStep is Adyen's public data-agent benchmark with a leaderboard of 2,246 submissions",
+ "evidence_grade": "B (benchmark trajectories; no production trace of data agents)",
+ "known_fidelity_notes": [
+  "tool calling is prompted JSON, not native tool_use",
+  "one of the LLM calls returned an Anthropic <invoke> block that Open Interpreter treated as text"
+ ],
+ "task_ids": "1273,1305,1464,1681,1753,1871,2697",
+ "iterations_dir": "recorder/dabstep_1273_1305_1464_1681_1753_1871_2697",
+ "recording_root": "/soe/surim/src/drafts/data_bundle",
+ "content_hash_recording_raw": "3ed875b3316a56d7",
+ "content_hash_note": "content_hash_recording is the hash of rec/hard7/run/messages.json with paths under recording_root written as BUNDLE (run_oi.py scrub); content_hash_recording_raw is the hash the recording printed, before that rule"
+}

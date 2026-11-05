@@ -1,0 +1,68 @@
+diff --git a/src/bin/bat/assets.rs b/src/bin/bat/assets.rs
+index 951a574..7ffb776 100644
+--- a/src/bin/bat/assets.rs
++++ b/src/bin/bat/assets.rs
+@@ -1,6 +1,7 @@
+ use std::borrow::Cow;
+ use std::fs;
+ use std::io;
++use std::path::{Path, PathBuf};
+ 
+ use clap::crate_version;
+ 
+@@ -18,10 +19,10 @@ pub fn cache_dir() -> Cow<'static, str> {
+     PROJECT_DIRS.cache_dir().to_string_lossy()
+ }
+ 
+-pub fn clear_assets() {
+-    clear_asset("themes.bin", "theme set cache");
+-    clear_asset("syntaxes.bin", "syntax set cache");
+-    clear_asset("metadata.yaml", "metadata file");
++pub fn clear_assets(cache_dir: &Path) {
++    clear_asset(cache_dir.join("themes.bin"), "theme set cache");
++    clear_asset(cache_dir.join("syntaxes.bin"), "syntax set cache");
++    clear_asset(cache_dir.join("metadata.yaml"), "metadata file");
+ }
+ 
+ pub fn assets_from_cache_or_binary(use_custom_assets: bool) -> Result<HighlightingAssets> {
+@@ -50,9 +51,8 @@ pub fn assets_from_cache_or_binary(use_custom_assets: bool) -> Result<Highlighti
+     Ok(custom_assets.unwrap_or_else(HighlightingAssets::from_binary))
+ }
+ 
+-fn clear_asset(filename: &str, description: &str) {
++fn clear_asset(path: PathBuf, description: &str) {
+     print!("Clearing {} ... ", description);
+-    let path = PROJECT_DIRS.cache_dir().join(filename);
+     match fs::remove_file(&path) {
+         Err(err) if err.kind() == io::ErrorKind::NotFound => {
+             println!("skipped (not present)");
+diff --git a/src/bin/bat/clap_app.rs b/src/bin/bat/clap_app.rs
+index 027701c..6f0c754 100644
+--- a/src/bin/bat/clap_app.rs
++++ b/src/bin/bat/clap_app.rs
+@@ -572,7 +572,6 @@ pub fn build_app(interactive_output: bool) -> Command {
+                 .arg(
+                     Arg::new("target")
+                         .long("target")
+-                        .requires("build")
+                         .value_name("dir")
+                         .help(
+                             "Use a different directory to store the cached syntax and theme set.",
+diff --git a/src/bin/bat/main.rs b/src/bin/bat/main.rs
+index b4e5d9b..5350884 100644
+--- a/src/bin/bat/main.rs
++++ b/src/bin/bat/main.rs
+@@ -67,7 +67,12 @@ fn run_cache_subcommand(matches: &clap::ArgMatches) -> Result<()> {
+         #[cfg(not(feature = "build-assets"))]
+         println!("bat has been built without the 'build-assets' feature. The 'cache --build' option is not available.");
+     } else if matches.get_flag("clear") {
+-        clear_assets();
++        let target_dir = matches
++            .get_one::<String>("target")
++            .map(Path::new)
++            .unwrap_or_else(|| PROJECT_DIRS.cache_dir());
++
++        clear_assets(target_dir);
+     }
+ 
+     Ok(())

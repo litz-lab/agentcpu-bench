@@ -1,0 +1,27 @@
+# Python build/runtime artifacts
+__pycache__/
+*.pyc
+*.so
+
+# Local replay and measurement outputs
+harness_out/
+
+# traces/: the SimPoint traces are fetched by scarab-infra (`./sci --fetch-traces`),
+# never stored in git
+traces/*
+!traces/README.md
+
+# bundles/: only the five scenario directories are tracked; anything else
+# placed here (other recordings, replay outputs) stays local
+bundles/*
+!bundles/README.md
+!bundles/api/
+!bundles/code-py/
+!bundles/code-rust/
+!bundles/data/
+bundles/*/venv/
+bundles/*/__pycache__/
+
+# local working directories, not part of the benchmark
+containers/
+analysis/

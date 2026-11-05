@@ -1,0 +1,4 @@
+products/
+tasks/*/repo/
+tasks/*/venv/
+tasks/*/replay_out/
