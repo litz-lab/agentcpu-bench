@@ -95,11 +95,4 @@ outputs of Claude Opus 5.
 
 ## Citation
 
-```bibtex
-@misc{agentcpu,
-  title  = {AgentCPU: a deployment-grounded CPU benchmark for LLM agents},
-  author = {Surim Oh and Heiner Litz},
-  year   = {2026},
-  note   = {arXiv identifier pending},
-}
-```
+TBD
